@@ -1,0 +1,9 @@
+{
+  "name": "basic-app",
+  "service": "app",
+  "forwardPorts": [3000, 5432],
+  "containerEnv": {
+    "API_TOKEN": "dev-secret-token",
+    "DATABASE_URL": "postgres://postgres:postgres@db:5432/app"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "name": "basic-app",
+  "private": true,
+  "scripts": {
+    "start": "node server.js"
+  }
+}

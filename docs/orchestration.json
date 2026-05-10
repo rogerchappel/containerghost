@@ -1,0 +1,19 @@
+{
+  "name": "containerghost",
+  "runtime": "node",
+  "entrypoints": [
+    "npm run build",
+    "npm test",
+    "npm run smoke",
+    "bash scripts/validate.sh"
+  ],
+  "commands": {
+    "scan": "node dist/src/index.js scan <path> --out <markdown> --json <json>",
+    "check": "node dist/src/index.js check <path> --fail-on missing-env,port-conflict,unknown-service"
+  },
+  "properties": {
+    "localFirst": true,
+    "deterministic": true,
+    "redactionDefault": true
+  }
+}

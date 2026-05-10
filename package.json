@@ -1,0 +1,43 @@
+{
+  "name": "containerghost",
+  "version": "0.1.0",
+  "description": "Local-first CLI that audits devcontainer, Docker Compose, Dockerfile, package scripts, and .env.example drift.",
+  "type": "module",
+  "bin": {
+    "containerghost": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "check": "tsc --noEmit",
+    "test": "node --test dist/tests/**/*.test.js",
+    "smoke": "bash tests/smoke.sh",
+    "validate": "bash scripts/validate.sh"
+  },
+  "dependencies": {
+    "yaml": "^2.8.1"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.1",
+    "typescript": "^5.9.3"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rogerchappel/containerghost.git"
+  },
+  "keywords": [
+    "devcontainer",
+    "docker-compose",
+    "cli",
+    "drift-detection",
+    "developer-tools"
+  ]
+}

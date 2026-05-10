@@ -1,0 +1,54 @@
+# ContainerGhost
+
+ContainerGhost is a local-first CLI that audits devcontainer, Docker Compose, Dockerfile, package scripts, and `.env.example` drift before humans or agents burn time in a broken setup.
+
+## Why it exists
+
+Dev environments drift quietly. A devcontainer points at the wrong service, forwarded ports no longer match compose, required env keys disappear, or Dockerfile/package scripts stop lining up. ContainerGhost turns that drift into deterministic local evidence.
+
+## Quick start
+
+```bash
+npm install
+npm run build
+node dist/src/index.js scan examples/basic --out containerghost.md --json containerghost.json
+node dist/src/index.js check examples/basic --fail-on missing-env,unknown-service
+```
+
+## CLI
+
+```bash
+containerghost scan . --out containerghost.md --json containerghost.json
+containerghost check . --fail-on missing-env,port-conflict,unknown-service
+```
+
+## What it checks in the MVP
+
+- `.devcontainer/devcontainer.json` exists
+- `docker-compose.yml` or `compose.yml` exists
+- `.env.example` exists and covers `containerEnv` keys
+- devcontainer `service` exists in compose services
+- forwarded ports exist in compose published ports
+- `package.json` includes a `dev` script when Dockerfile + package.json are present
+- obvious secrets in text evidence are redacted by default
+
+## Safety model
+
+- Offline and local-first
+- No telemetry
+- No hidden writes outside explicit output files
+- Redaction enabled by default for common token/key/password patterns
+
+## Limitations
+
+- The MVP uses heuristic parsing, not full Docker/devcontainer schema validation
+- Port matching currently checks published host ports only
+- Secret redaction is pattern-based and intentionally conservative
+
+## Fixture smoke
+
+```bash
+npm run smoke
+```
+
+This runs a real CLI scan against `examples/basic` and asserts deterministic Markdown and JSON output.
