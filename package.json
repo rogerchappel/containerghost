@@ -4,14 +4,17 @@
   "description": "Local-first CLI that audits devcontainer, Docker Compose, Dockerfile, package scripts, and .env.example drift.",
   "type": "module",
   "bin": {
-    "containerghost": "./dist/index.js"
+    "containerghost": "./dist/src/index.js"
   },
   "scripts": {
     "build": "tsc",
     "check": "tsc --noEmit",
+    "pretest": "npm run build",
     "test": "node --test dist/tests/**/*.test.js",
     "smoke": "bash tests/smoke.sh",
-    "validate": "bash scripts/validate.sh"
+    "validate": "bash scripts/validate.sh",
+    "package:smoke": "bash scripts/package-smoke.sh",
+    "release:check": "npm run check && npm test && npm run smoke && npm run package:smoke"
   },
   "dependencies": {
     "yaml": "^2.8.1"
@@ -25,6 +28,8 @@
   },
   "files": [
     "dist",
+    "docs",
+    "examples",
     "README.md",
     "LICENSE"
   ],

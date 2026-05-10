@@ -9,14 +9,14 @@ import { parseCliArgs } from './utils/args.js';
 function main() {
   const cli = parseCliArgs(process.argv.slice(2));
 
-  if (cli.help || !cli.command) {
-    printHelp();
-    process.exit(cli.help ? 0 : 1);
-  }
-
   if (cli.version) {
     console.log('0.1.0');
     return;
+  }
+
+  if (cli.help || !cli.command) {
+    printHelp();
+    process.exit(cli.help ? 0 : 1);
   }
 
   if (!['scan', 'check'].includes(cli.command)) {
