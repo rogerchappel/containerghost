@@ -56,7 +56,7 @@ export function scanProject(targetPath: string, options: { redact: boolean; fail
 
   if (envExample && devcontainer) {
     const containerEnv = Object.keys((devcontainer as any).containerEnv ?? {});
-    const envKeys = envExample.split(/\r?\n/).filter(Boolean).map((line) => line.split('=')[0].trim());
+    const envKeys = envExample.split(/\r?\n/).map((line: string) => parseEnvExampleKey(line)).filter((key): key is string => Boolean(key));
     const missingEnv = containerEnv.filter((key) => !envKeys.includes(key));
     if (missingEnv.length > 0) {
       issues.push(issue('missing-env', 'error', 'Container env keys missing from .env.example', `Missing keys: ${missingEnv.join(', ')}`));
@@ -75,6 +75,14 @@ export function scanProject(targetPath: string, options: { redact: boolean; fail
     issues: issues.sort((left, right) => `${left.gate}:${left.title}`.localeCompare(`${right.gate}:${right.title}`)),
     evidence,
   };
+}
+
+function parseEnvExampleKey(line: string): string | null {
+  const trimmed = line.trim();
+  if (!trimmed || trimmed.startsWith('#')) return null;
+  const withoutExport = trimmed.startsWith('export ') ? trimmed.slice('export '.length).trimStart() : trimmed;
+  const match = withoutExport.match(/^([A-Za-z_][A-Za-z0-9_]*)\s*=/);
+  return match?.[1] ?? null;
 }
 
 function firstExisting(paths: string[]): string {
