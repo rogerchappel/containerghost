@@ -52,3 +52,14 @@ npm run smoke
 ```
 
 This runs a real CLI scan against `examples/basic` and asserts deterministic Markdown and JSON output.
+
+## Verify
+
+Run local verification before opening a PR or publishing:
+
+```bash
+npm test
+npm run release:check
+```
+
+`release:check` runs type-checking, tests, smoke verification, and a dry-run `npm pack` to ensure everything ships cleanly.
