@@ -4,7 +4,7 @@
   "description": "Local-first CLI that audits devcontainer, Docker Compose, Dockerfile, package scripts, and .env.example drift.",
   "type": "module",
   "bin": {
-    "containerghost": "./dist/index.js"
+    "containerghost": "./dist/src/index.js"
   },
   "scripts": {
     "build": "tsc",
