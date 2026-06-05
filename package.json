@@ -31,7 +31,8 @@
     "docs",
     "examples",
     "README.md",
-    "LICENSE"
+    "LICENSE",
+    "SECURITY.md"
   ],
   "license": "MIT",
   "repository": {
