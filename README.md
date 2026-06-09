@@ -63,3 +63,15 @@ npm run release:check
 ```
 
 `release:check` runs type-checking, tests, smoke verification, and a dry-run `npm pack` to ensure everything ships cleanly.
+
+## Development
+
+Run the same checks locally before opening a PR:
+
+- `npm run check` - tsc --noEmit
+- `npm run build` - tsc
+- `npm test` - node --test dist/tests/**/*.test.js
+- `npm run smoke` - bash tests/smoke.sh
+- `npm run validate` - bash scripts/validate.sh
+- `npm run package:smoke` - bash scripts/package-smoke.sh
+- `npm run release:check` - npm run check && npm test && npm run smoke && npm run package:smoke
