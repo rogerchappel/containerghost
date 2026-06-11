@@ -64,6 +64,10 @@ npm run release:check
 
 `release:check` runs type-checking, tests, smoke verification, and a dry-run `npm pack` to ensure everything ships cleanly.
 
+## Release notes
+
+The 0.1.0 release candidate ships the CLI, the `examples/basic` fixture, support docs, and package smoke verification. See [CHANGELOG.md](CHANGELOG.md) for the current release notes and publish readiness notes.
+
 ## Development
 
 Run the same checks locally before opening a PR:
