@@ -32,7 +32,9 @@
     "examples",
     "README.md",
     "LICENSE",
-    "SECURITY.md"
+    "SECURITY.md",
+    "CHANGELOG.md",
+    "CONTRIBUTING.md"
   ],
   "license": "MIT",
   "repository": {
