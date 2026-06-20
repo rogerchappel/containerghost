@@ -5,36 +5,34 @@ on:
   push:
     branches:
       - main
-  workflow_dispatch:
 
 permissions:
   contents: read
 
 jobs:
   verify:
-    name: Verify package
     runs-on: ubuntu-latest
-
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v6
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v5
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: 20
+          cache: npm
 
       - name: Install dependencies
         run: npm ci
 
-      - name: Run static checks
+      - name: Type-check
         run: npm run check
 
-      - name: Run tests
+      - name: Test
         run: npm test
 
-      - name: Run smoke
+      - name: Smoke
         run: npm run smoke
 
-      - name: Run package smoke
+      - name: Package smoke
         run: npm run package:smoke
