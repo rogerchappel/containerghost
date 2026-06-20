@@ -58,11 +58,11 @@ This runs a real CLI scan against `examples/basic` and asserts deterministic Mar
 Run local verification before opening a PR or publishing:
 
 ```bash
-npm test
 npm run release:check
 ```
 
-`release:check` runs type-checking, tests, smoke verification, and a dry-run `npm pack` to ensure everything ships cleanly.
+CI runs the same type-checking, tests, smoke verification, and dry-run `npm pack`
+as separate steps so failures identify the broken release gate quickly.
 
 ## Release notes
 
