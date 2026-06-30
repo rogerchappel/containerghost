@@ -53,6 +53,16 @@ npm run smoke
 
 This runs a real CLI scan against `examples/basic` and asserts deterministic Markdown and JSON output.
 
+## Demo
+
+Run a fuller drift scan and gate walkthrough against the checked-in fixture:
+
+```bash
+bash demo/run-basic-drift-scan.sh
+```
+
+The walkthrough is documented in [docs/tutorials/basic-devcontainer-drift-scan.md](docs/tutorials/basic-devcontainer-drift-scan.md), with a short recording brief in [docs/promo/basic-drift-video-brief.md](docs/promo/basic-drift-video-brief.md).
+
 ## Verify
 
 Run local verification before opening a PR or publishing:
