@@ -2,6 +2,20 @@
 
 ContainerGhost is a local-first CLI that audits devcontainer, Docker Compose, Dockerfile, package scripts, and `.env.example` drift before humans or agents burn time in a broken setup.
 
+
+## Quickstart
+
+Run the tool from a fresh checkout:
+
+```sh
+npm install
+npm run build
+node dist/src/index.js --help
+npm test
+```
+
+The help command is a quick smoke test for the CLI entrypoint, and `npm test` runs the committed regression suite before you depend on the output.
+
 ## Why it exists
 
 Dev environments drift quietly. A devcontainer points at the wrong service, forwarded ports no longer match compose, required env keys disappear, or Dockerfile/package scripts stop lining up. ContainerGhost turns that drift into deterministic local evidence.
