@@ -14,7 +14,8 @@
     "smoke": "bash tests/smoke.sh",
     "validate": "bash scripts/validate.sh",
     "package:smoke": "bash scripts/package-smoke.sh",
-    "release:check": "npm run check && npm test && npm run smoke && npm run package:smoke"
+    "release:check": "npm run check && npm test && npm run smoke && npm run package:smoke",
+    "lint": "npm run check"
   },
   "dependencies": {
     "yaml": "^2.8.1"
