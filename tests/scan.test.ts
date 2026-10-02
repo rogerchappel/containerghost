@@ -40,6 +40,18 @@ NODE_ENV=test # inline comments are fine
   assert.deepEqual(report.summary.failedGates, []);
 });
 
+test('forwarded ports match the container port in short and long Compose mappings', () => {
+  const root = mkdtempSync(join(tmpdir(), 'containerghost-ports-'));
+  mkdirSync(join(root, '.devcontainer'));
+  writeFileSync(join(root, '.devcontainer', 'devcontainer.json'), JSON.stringify({ service: 'app', forwardPorts: [80, 443] }));
+  writeFileSync(join(root, 'docker-compose.yml'), `services:\n  app:\n    ports:\n      - "8080:80"\n      - target: 443\n        published: "8443"\n`);
+  writeFileSync(join(root, '.env.example'), '');
+
+  const report = scanProject(root, { redact: true, failOn: [] });
+
+  assert.equal(report.issues.some((issue) => issue.gate === 'port-conflict'), false);
+});
+
 test('renderers return stable outputs', () => {
   const report = scanProject(fixture, { redact: true, failOn: [] });
   const markdown = renderMarkdown(report);
