@@ -26,7 +26,13 @@ export function scanProject(targetPath: string, options: { redact: boolean; fail
   const forwardPorts = Array.isArray((devcontainer as any)?.forwardPorts) ? (devcontainer as any).forwardPorts.map(Number) : [];
   const composePorts = services.flatMap((serviceName) => {
     const rawPorts = ((compose as any).services?.[serviceName]?.ports ?? []) as Array<string | number>;
-    return rawPorts.map((value) => Number(String(value).split(':')[0]));
+    return rawPorts.map((value) => {
+      if (typeof value === 'object' && value !== null && 'target' in value) {
+        return Number((value as { target: string | number }).target);
+      }
+      const parts = String(value).split(':');
+      return Number(parts.length > 1 ? parts[parts.length - 1]!.split('/')[0] : parts[0]);
+    });
   }).filter((value) => !Number.isNaN(value));
 
   if (!devcontainer) {
